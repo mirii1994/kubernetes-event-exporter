@@ -1,6 +1,8 @@
 package sinks
 
-import "errors"
+import (
+	"errors"
+)
 
 // Receiver allows receiving
 type ReceiverConfig struct {
@@ -23,6 +25,7 @@ type ReceiverConfig struct {
 	BigQuery      *BigQueryConfig      `yaml:"bigquery"`
 	EventBridge   *EventBridgeConfig   `yaml:"eventbridge"`
 	Pipe          *PipeConfig          `yaml:"pipe"`
+	Logzio        *LogzioConfig        `yaml:"logzio"`
 }
 
 func (r *ReceiverConfig) Validate() error {
@@ -105,6 +108,10 @@ func (r *ReceiverConfig) GetSink() (Sink, error) {
 
 	if r.EventBridge != nil {
 		return NewEventBridgeSink(r.EventBridge)
+	}
+
+	if r.Logzio != nil {
+		return NewLogzioSink(r.Logzio)
 	}
 
 	return nil, errors.New("unknown sink")
