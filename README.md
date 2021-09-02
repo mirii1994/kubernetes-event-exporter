@@ -353,6 +353,19 @@ receivers:
 
 ```
 
+### Logz.io
+
+TODO
+
+```
+receivers:
+  - name: "logzio"
+    logzio:
+      token: ${LOGZIO_API_TOKEN}
+      baseApi: TODO
+      debug: # optional
+```
+
 # BigQuery
 
 Google's query thing
